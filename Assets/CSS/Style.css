@@ -1,0 +1,75 @@
+
+:root {
+    
+--c-Color1:  #D3B8CE;
+--c-Color2: #E80CBF;
+--c-Color3: #D3B9B8;
+--c-Color4: #EAD9BF;
+}
+
+body {
+background-color: var(--c-Color4);
+
+}
+
+.todo {
+    background: var(--c-Color4);
+    width: 100vw;
+    height: 90vh;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    grid-template-rows: 1fr 1fr 1fr 1fr;
+}
+header {
+grid-column: 100%;
+grid-row: 1 / 2;
+}
+.Opciones {
+    
+    display: grid;
+    grid-column: 1 / 4;
+    grid-template-columns: repeat(4,1fr);
+    grid-gap: 10px;
+    grid-row: 2 / 3;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 220px;
+    font-size: 40px;
+    
+    
+    
+}
+.Opciones li {
+    background-color: var(--c-Color3);
+    border: 1px solid var(--c-Color2);
+    list-style-type: none;
+}
+.elegir {
+    display: grid;
+   
+    grid-column: 2 / 3;
+    grid-row: 3 / 4;
+    grid-template-columns: repeat(4,1fr);
+    grid-auto-rows: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 220px;
+    font-size: 30px;
+}
+.elegir li {
+   
+    background: var(--c-Color1);
+    border: 1px solid var(--c-Color2);
+    list-style-type: none;
+}
+.elegir .Siguiente {
+    grid-column: 1 / 5;
+    text-align: center;
+    
+ 
+}
+footer {
+grid-column: 100%;
+grid-row: 4 / 5;
+}
