@@ -15,16 +15,19 @@ var secuencia3 = [];
 var secuenciaFinal = [];
 var indice; //guarda el indice de la respuesta en "secuencia"
 var Respuesta; //guarda la respuesta
-var Opciones = [];
-var Puntaje = 0;
+var OPCIONES = [];
+var puntaje = 0;
 var botonPress;
 var estadoBoton = false;
-window.onload = function () {
 
-    inicioJuego();
-    escogerRespuesta();
-    mostrarSecuencia();
-    mostrarEleccion();
+puntaje +=parseInt (localStorage.getItem("guardado"));
+window.onload = function () {
+        inicioJuego();
+        escogerRespuesta();
+        mostrarSecuencia();
+        mostrarEleccion();
+        
+    
 }
 
 //Funciones
@@ -35,7 +38,7 @@ inicio == false
 
 should be !inicio
 */
-    if (inicio == false) {
+    if (!inicio) {
         elegirAleatorio()
         repetir = elegir; //3
         inicio = true;
@@ -54,7 +57,7 @@ function escogerRespuesta() {
             indice = indiceAleatorio();
             Respuesta = secuencia1[indice];
             secuenciaFinal = secuencia1;
-            Opciones = elegirRespuestas(secuenciaFinal);
+            OPCIONES = elegirRespuestas(secuenciaFinal);
             secuenciaFinal[indice] = '?';
             break;
         case 2:
@@ -62,7 +65,7 @@ function escogerRespuesta() {
             indice = indiceAleatorio();
             Respuesta = secuencia2[indice];
             secuenciaFinal = secuencia2;
-            Opciones = elegirRespuestas(secuenciaFinal);
+            OPCIONES = elegirRespuestas(secuenciaFinal);
             secuenciaFinal[indice] = '?';
             break;
 
@@ -71,7 +74,7 @@ function escogerRespuesta() {
             indice = indiceAleatorio();
             Respuesta = secuencia3[indice];
             secuenciaFinal = secuencia3;
-            Opciones = elegirRespuestas(secuenciaFinal);
+            OPCIONES = elegirRespuestas(secuenciaFinal);
             secuenciaFinal[indice] = '?';
             break;
 
@@ -189,28 +192,41 @@ function valoresUnicos(tempo,actual2) {
 
 function mostrarSecuencia() {
 
-    var Mostrar = document.getElementById("OP");
-    Mostrar.innerHTML = "";
+    var mostrar = document.getElementById("OP");
+    mostrar.innerHTML = "";
 
     for (let i = 0; i < 6; i++) {
         var texto = document.createTextNode(secuenciaFinal[i]);
-        var Mostrar1 = document.createElement("li");
-        Mostrar1.appendChild(texto);
-        Mostrar.appendChild(Mostrar1);
+        var mostrar1 = document.createElement("li");
+        mostrar1.appendChild(texto);
+        mostrar.appendChild(mostrar1);
     }
 
 }
 //debe recibir un numero (la respuesta) y debe devolver numeros cercanos
 function mostrarEleccion() {
 
-    var Mostrar = document.getElementById("elec");
-    Mostrar.innerHTML = "";
+    var mostrar = document.getElementById("elec");
+    mostrar.innerHTML = "";
 
     for (let i = 0; i < 4; i++) {
-        var texto = document.createTextNode(Opciones[i]);
-        var Mostrar1 = document.createElement("button");
-        Mostrar1.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
-        Mostrar1.value = Opciones[i];
+        var texto;
+        switch(i){
+            case 0:  texto = document.createTextNode("a. "+OPCIONES[i]);
+             break;
+            case 1:  texto = document.createTextNode("b. "+OPCIONES[i]);
+                break;
+            case 2:  texto = document.createTextNode("c. "+OPCIONES[i]);
+                break;
+            case 3:  texto = document.createTextNode("d. "+OPCIONES[i]);
+                break;
+             default:
+                 break;
+        }
+        
+        var mostrar1 = document.createElement("button");
+        mostrar1.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
+        mostrar1.value = OPCIONES[i];
 	/*
 	inside the value of onClick Mostrar1 is undefined to refer to a button where the event occurs we can use this
 	Mostrar1.setAttribute("onClick", "Presionando(Mostrar1)";
@@ -219,9 +235,9 @@ should be
 Mostrar1.setAttribute("onClick","Presionado(this)");
 
 */
-        Mostrar1.setAttribute("onClick","Presionado(this)");
-        Mostrar1.appendChild(texto);
-        Mostrar.appendChild(Mostrar1);
+        mostrar1.setAttribute("onClick","Presionado(this)");
+        mostrar1.appendChild(texto);
+        mostrar.appendChild(mostrar1);
     }
 }
 
@@ -237,8 +253,15 @@ function CalcPuntaje() {
 /*
 	use Puntaje+=1 instead of Puntaje++
 */
-    Puntaje = (botonPress == Respuesta) ? Puntaje+=1 : Puntaje;
-    alert("Tu Puntaje: " + Puntaje);
+    puntaje = (botonPress == Respuesta) ? puntaje + 1 : puntaje;
+    alert("Tu Puntaje: " + puntaje);
+    localStorage.setItem("guardado", puntaje);
+    if(puntaje == 5){
+        while (true){
+            alert("Ganaste!");
+        }
+    }
+    location.reload();
 }
 
 function cambiarEstadoTrue(presion) {
