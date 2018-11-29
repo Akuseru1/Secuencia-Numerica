@@ -225,7 +225,7 @@ function mostrarEleccion() {
         }
         
         var mostrar1 = document.createElement("button");
-        mostrar1.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
+        mostrar1.setAttribute("style","font-size: 30px; background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;border: 1px solid var(--c-Color1);");
         mostrar1.value = OPCIONES[i];
 	/*
 	inside the value of onClick Mostrar1 is undefined to refer to a button where the event occurs we can use this
@@ -265,7 +265,7 @@ function CalcPuntaje() {
 }
 
 function cambiarEstadoTrue(presion) {
-    presion.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;border: 1px solid red");
+    presion.setAttribute("style","font-size: 30px;background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;border: 1px solid var(--c-Color3);");
 /*
 to prevent errors parseInt(presion.value)
 */
@@ -275,6 +275,6 @@ to prevent errors parseInt(presion.value)
 }
 
 function cambiarEstadoFalse(presion) {
-    presion.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
+    presion.setAttribute("style","font-size: 30px;background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;border: 1px solid var(--c-Color2);");
     estadoBoton = false;
 }
