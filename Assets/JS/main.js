@@ -1,3 +1,7 @@
+/*vars and name functions they should not start in uppercase*/
+/*continue button should be a const
+	const continueButton = document.getElementById('btn')
+*/
 var continueButton = document.getElementById("btn");
 continueButton.addEventListener("click",CalcPuntaje);
 var elegir; // sera el que escoja la secuencia inicial
@@ -26,6 +30,11 @@ window.onload = function () {
 //Funciones
 //Se asegura que no se repitan los juegos en cada siguiente
 function inicioJuego() {
+/*REDUNDANT EVALUATION
+inicio == false
+
+should be !inicio
+*/
     if (inicio == false) {
         elegirAleatorio()
         repetir = elegir; //3
@@ -202,7 +211,15 @@ function mostrarEleccion() {
         var Mostrar1 = document.createElement("button");
         Mostrar1.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
         Mostrar1.value = Opciones[i];
-        Mostrar1.setAttribute("onClick","Presionado(Mostrar1);");
+	/*
+	inside the value of onClick Mostrar1 is undefined to refer to a button where the event occurs we can use this
+	Mostrar1.setAttribute("onClick", "Presionando(Mostrar1)";
+
+should be 
+Mostrar1.setAttribute("onClick","Presionado(this)");
+
+*/
+        Mostrar1.setAttribute("onClick","Presionado(this)");
         Mostrar1.appendChild(texto);
         Mostrar.appendChild(Mostrar1);
     }
@@ -217,13 +234,19 @@ function Presionado(pressedButton) {
 }
 
 function CalcPuntaje() {
-    Puntaje = (botonPress == Respuesta) ? Puntaje++ : Puntaje;
+/*
+	use Puntaje+=1 instead of Puntaje++
+*/
+    Puntaje = (botonPress == Respuesta) ? Puntaje+=1 : Puntaje;
     alert("Tu Puntaje: " + Puntaje);
 }
 
 function cambiarEstadoTrue(presion) {
     presion.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;border: 1px solid red");
-    botonPress = presion.value;
+/*
+to prevent errors parseInt(presion.value)
+*/
+    botonPress = parseInt(presion.value);
     estadoBoton = true;
     
 }
