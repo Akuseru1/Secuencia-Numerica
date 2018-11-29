@@ -1,3 +1,5 @@
+var continueButton = document.getElementById("btn");
+continueButton.addEventListener("click",CalcPuntaje);
 var elegir; // sera el que escoja la secuencia inicial
 var repetir; //permite que la misma secuencia no se repita
 var inicio = false;
@@ -10,8 +12,9 @@ var secuenciaFinal = [];
 var indice; //guarda el indice de la respuesta en "secuencia"
 var Respuesta; //guarda la respuesta
 var Opciones = [];
-var puntaje;
-
+var Puntaje = 0;
+var botonPress;
+var estadoBoton = false;
 window.onload = function () {
 
     inicioJuego();
@@ -196,11 +199,36 @@ function mostrarEleccion() {
 
     for (let i = 0; i < 4; i++) {
         var texto = document.createTextNode(Opciones[i]);
-        var Mostrar1 = document.createElement("li");
+        var Mostrar1 = document.createElement("button");
+        Mostrar1.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
+        Mostrar1.value = Opciones[i];
+        Mostrar1.setAttribute("onClick","Presionado(Mostrar1);");
         Mostrar1.appendChild(texto);
         Mostrar.appendChild(Mostrar1);
     }
 }
 
+function Presionado(pressedButton) {
+    if(!estadoBoton) {
+        cambiarEstadoTrue(pressedButton);
+    } else {
+        cambiarEstadoFalse(pressedButton);
+    }
+}
 
+function CalcPuntaje() {
+    Puntaje = (botonPress == Respuesta) ? Puntaje++ : Puntaje;
+    alert("Tu Puntaje: " + Puntaje);
+}
 
+function cambiarEstadoTrue(presion) {
+    presion.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;border: 1px solid red");
+    botonPress = presion.value;
+    estadoBoton = true;
+    
+}
+
+function cambiarEstadoFalse(presion) {
+    presion.setAttribute("style","background-color:aqua; width: 100px; height: 50px;-moz-border-radius:13px; -webkit-border-radius:13px; border-radius:13px;");
+    estadoBoton = false;
+}
