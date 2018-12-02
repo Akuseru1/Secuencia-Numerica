@@ -14,7 +14,7 @@ background-color: var(--c-Color4);
 
 .todo {
     background: var(--c-Color4);
-    width: 80vw;
+    width: 90vw;
     height: 90vh;
     display: grid;
     grid-template-columns: repeat(6,1fr);
@@ -48,12 +48,14 @@ grid-row: 1 / 2;
 .elegir {
     display: grid;
     height: 200px;
+    width: 37vw;
     grid-column: 3 / 6;
     grid-row: 3 /4;
     grid-template-columns: repeat(6,1fr);
     grid-gap: 10px;
     text-align: center;
     margin-left: 180px;
+    
     
 }
 .elegir li {
@@ -72,9 +74,11 @@ grid-row: 1 / 2;
     border: 1px solid var(--c-Color2);
     grid-row: 4 / 5;
     grid-column: 4/ 5;
-    
-    margin-left: 100px;
+    margin-left: 40px;
     font-size: 24px;
+    position: relative;
+    bottom: 100px;
+    
      
 }
 footer {
