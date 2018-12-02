@@ -20,8 +20,10 @@ var puntaje = 0;
 var botonPress;
 var estadoBoton = false;
 
-puntaje +=parseInt (localStorage.getItem("guardado"));
+
+
 window.onload = function () {
+    
         inicioJuego();
         escogerRespuesta();
         mostrarSecuencia();
@@ -251,17 +253,27 @@ function Presionado(pressedButton) {
 
 function CalcPuntaje() {
 /*
-	use Puntaje+=1 instead of Puntaje++
+    use Puntaje+=1 instead of Puntaje++
+
 */
-    puntaje = (botonPress == Respuesta) ? puntaje + 1 : puntaje;
-    alert("Tu Puntaje: " + puntaje);
-    localStorage.setItem("guardado", puntaje);
-    if(puntaje == 5){
-        while (true){
-            alert("Ganaste!");
+    if (isNaN(parseInt(localStorage.getItem("guardado")))) {
+        puntaje = (botonPress == Respuesta) ? puntaje + 1 : puntaje;
+        localStorage.setItem("guardado", puntaje);
+        
+        alert("Tu puntaje: "+puntaje);
+        location.reload();
+    } else {
+        memoria = localStorage.getItem("guardado");
+        memoria = (botonPress == Respuesta) ? parseInt(localStorage.getItem("guardado")) + 1 : parseInt(localStorage.getItem("guardado"));
+        alert("Tu Puntaje: " + memoria);
+        localStorage.setItem("guardado",memoria);
+        if (parseInt(localStorage.getItem("guardado")) == 5) {
+            while (true) {
+                alert("Ganaste!");
+            }
         }
+        location.reload();
     }
-    location.reload();
 }
 
 function cambiarEstadoTrue(presion) {
